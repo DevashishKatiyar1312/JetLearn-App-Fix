@@ -778,7 +778,7 @@ def find_col(df: pd.DataFrame, candidates):
 def coerce_datetime(series: pd.Series) -> pd.Series:
     if series is None:
         return pd.Series(pd.NaT, index=series.index if series is not None else None)
-    s = pd.to_datetime(series, errors="coerce", infer_datetime_format=True, dayfirst=True)
+    s = pd.to_datetime(series, errors="coerce", dayfirst=True)
     if s.notna().sum() == 0:
         for unit in ["s", "ms"]:
             try:
