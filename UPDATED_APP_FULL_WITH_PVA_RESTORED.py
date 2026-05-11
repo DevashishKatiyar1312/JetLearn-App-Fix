@@ -1866,7 +1866,7 @@ def _render_performance_deal_stage(
         d["_create"] = pd.NaT
 
     # Filter by Last Activity Date window
-    mask_last = d["_last"].dt.date.between(start, end)
+    mask_last = d["_last"].astype(object).dt.date.between(start, end)
 
     # MTD adds cohort restriction by Create Date month==window month
     if mode == "MTD" and d["_create"].notna().any():
