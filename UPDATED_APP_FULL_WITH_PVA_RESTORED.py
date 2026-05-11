@@ -11890,7 +11890,7 @@ def _render_performance_quick_view(
 
     # Normalize date-like columns (dayfirst safe)
     def _dt(s):
-        return pd.to_datetime(s, errors="coerce", infer_datetime_format=True, dayfirst=True)
+        return pd.to_datetime(s, errors="coerce", dayfirst=True)
 
     d = df_f.copy()
     d["__create"] = _dt(d[create_col])
