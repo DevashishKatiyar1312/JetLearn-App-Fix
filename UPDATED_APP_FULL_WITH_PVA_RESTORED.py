@@ -498,7 +498,7 @@ def _render_performance_leaderboard(
     # --- Normalize fields ---
     def _dt(s):
         try:
-            return pd.to_datetime(s, errors="coerce", infer_datetime_format=True, dayfirst=True).dt.date
+            return pd.to_datetime(s, errors="coerce", dayfirst=True).dt.date
         except Exception:
             return pd.to_datetime(pd.Series([None]*len(s)), errors="coerce").dt.date
 
@@ -512,11 +512,11 @@ def _render_performance_leaderboard(
     _REFI = df_f[ref_intent_col].fillna("Unknown").astype(str).str.strip() if (ref_intent_col and ref_intent_col in df_f.columns) else pd.Series("Unknown", index=df_f.index)
 
     # --- Window masks ---
-    c_in = _C.between(range_start, range_end)
-    p_in = _P.between(range_start, range_end)
-    f_in = _F.between(range_start, range_end)
-    r_in = _R.between(range_start, range_end)
-    d_in = _D.between(range_start, range_end)
+   c_in = _C.astype(object).between(range_start, range_end)
+   p_in = _P.astype(object).between(range_start, range_end)
+   f_in = _F.astype(object).between(range_start, range_end)
+   r_in = _R.astype(object).between(range_start, range_end)
+   d_in = _D.astype(object).between(range_start, range_end)
 
     # Mode rules
     if level == "MTD":
